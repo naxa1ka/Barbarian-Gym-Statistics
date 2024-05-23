@@ -20,12 +20,23 @@ public class Compose : IDisposable
     public void Start()
     {
         _subscriptionOnTimerElapsed = _timer.Elapsed.Subscribe(OnTimerElapsed);
+        _ = Task.Run(WriteGymAvailability);
+        _timer.Start();
     }
 
-    private async void OnTimerElapsed(Unit _)
+    private async void OnTimerElapsed(Unit _) => await WriteGymAvailability();
+
+    private async Task WriteGymAvailability()
     {
-        var gymAvailability = await _gymAvailabilityService.GetGymAvailabilityAsync();
-        _journal.Write(gymAvailability);
+        try
+        {
+            var gymAvailability = await _gymAvailabilityService.GetGymAvailabilityAsync();
+            _journal.Write(gymAvailability);
+        }
+        catch (Exception exception)
+        {
+            _journal.Write(exception);
+        }
     }
 
     public void Dispose() => _subscriptionOnTimerElapsed.Dispose();

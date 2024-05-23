@@ -1,6 +1,6 @@
 namespace BarbarianGymStatistics.Tests;
 
-public static class GymAvailabilityDataFactory
+public static class GymAvailabilityTestDataFactory
 {
     public static string CreateXmlResponse(int liveCount, int capacity)
     {
