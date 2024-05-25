@@ -1,5 +1,5 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0bd86805_002D9271_002D4c3b_002Dba1c_002Deedae4aa4f3a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ParseXmlResponse_ShouldReturnNullValues_WhenXmlIsInvalid #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0bd86805_002D9271_002D4c3b_002Dba1c_002Deedae4aa4f3a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ParseXmlResponse_ShouldReturnNullValues_WhenXmlIsInvalid #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::3272BD68-0C41-498F-AC51-E0ECAAD168FD::net7.0::BarbarianGymStatistics.Tests.GymAvailabilityTests.ParseXmlResponse_ShouldReturnNullValues_WhenXmlIsInvalid&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::3272BD68-0C41-498F-AC51-E0ECAAD168FD::net7.0::BarbarianGymStatistics.Tests.GymAvailabilityServiceTests.When_GetGymAvailabilityAsync_IsCalled_And_ResponseIsSuccess_Then_ReturnsGymAvailability&lt;/TestId&gt;&#xD;
@@ -8,7 +8,7 @@
     &lt;TestId&gt;NUnit3x::3272BD68-0C41-498F-AC51-E0ECAAD168FD::net7.0::BarbarianGymStatistics.Tests.GymAvailabilityServiceTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=51444d8b_002D68c8_002D443e_002D97db_002D3eb28b581f22/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ParseXmlResponse_ShouldReturnNullValues_WhenXmlIsInvalid" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=51444d8b_002D68c8_002D443e_002D97db_002D3eb28b581f22/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ParseXmlResponse_ShouldReturnNullValues_WhenXmlIsInvalid" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::3272BD68-0C41-498F-AC51-E0ECAAD168FD::net7.0::BarbarianGymStatistics.Tests.GymAvailabilityTests.ParseXmlResponse_ShouldReturnNullValues_WhenXmlIsInvalid&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::3272BD68-0C41-498F-AC51-E0ECAAD168FD::net7.0::BarbarianGymStatistics.Tests.GymAvailabilityTests.WhenCreateGymAvailabilityFromXml_AndXmlIsValid_ThenShouldReturnExpectedValues&lt;/TestId&gt;&#xD;
