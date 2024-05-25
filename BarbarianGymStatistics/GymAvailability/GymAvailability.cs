@@ -19,8 +19,9 @@ public class GymAvailability : IGymAvailability
         const string dataSetName = "DataSet";
         var doc = XDocument.Parse(xml);
         var dataSet = doc.Descendants(dataSetName).Single();
-        var liveCount = dataSet.Descendants(columnName).ElementAt(1).Value;
-        var capacity = dataSet.Descendants(columnName).ElementAt(2).Value;
+        var columns = dataSet.Descendants(columnName).ToList();
+        var liveCount = columns.ElementAt(1).Value;
+        var capacity = columns.ElementAt(2).Value;
         return new GymAvailability(int.Parse(liveCount), int.Parse(capacity));
     }
 
