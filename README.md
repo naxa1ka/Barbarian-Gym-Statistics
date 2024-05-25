@@ -9,3 +9,9 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 
 # Results
 Will be here after gathering
+
+# Gym contacts
+* [Map](https://maps.app.goo.gl/Wr1nSoi5iaJxheBi8)
+* [Site](https://www.barbarianfit.com.cy/)
+* [Android App](https://play.google.com/store/apps/details?id=eu.dscompass.myfitnesstrainer_app&hl=en_US&pli=1)
+* [Apple App](https://apps.apple.com/mw/app/my-fitness-trainer/id1372844136)
