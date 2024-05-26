@@ -1,6 +1,6 @@
 namespace BarbarianGymStatistics;
 
-public interface IGymAvailabilityService
+public interface IGym
 {
     Task<GymAvailability> GetGymAvailabilityAsync(CancellationToken cancellationToken = default);
 }

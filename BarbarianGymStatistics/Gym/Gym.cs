@@ -2,11 +2,11 @@ using RestSharp;
 
 namespace BarbarianGymStatistics;
 
-public class GymAvailabilityService : IGymAvailabilityService
+public class Gym : IGym
 {
     private readonly IRestClient _client;
 
-    public GymAvailabilityService(IRestClient client)
+    public Gym(IRestClient client)
     {
         _client = client;
     }

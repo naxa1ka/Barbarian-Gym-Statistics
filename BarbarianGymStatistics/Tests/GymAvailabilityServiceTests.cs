@@ -21,7 +21,7 @@ public class GymAvailabilityServiceTests
         };
         client.ExecuteAsync(Arg.Any<RestRequest>()).Returns(Task.FromResult(response));
 
-        var service = new GymAvailabilityService(client);
+        var service = new Gym(client);
 
         // Act
         var result = await service.GetGymAvailabilityAsync();
@@ -44,7 +44,7 @@ public class GymAvailabilityServiceTests
         };
         client.ExecuteAsync(Arg.Any<RestRequest>()).Returns(Task.FromResult(response));
 
-        var service = new GymAvailabilityService(client);
+        var service = new Gym(client);
 
         // Act
         Func<Task> act = async () => await service.GetGymAvailabilityAsync();

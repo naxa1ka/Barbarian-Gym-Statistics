@@ -15,6 +15,8 @@ public class GymAvailability : IGymAvailability
         IsClosed = isClosed;
     }
 
+    public static GymAvailability Closed => new(0, 0, true);
+
     public static GymAvailability FromXml(string xml)
     {
         const string columnName = "c";
@@ -30,9 +32,9 @@ public class GymAvailability : IGymAvailability
         }
         catch (Exception exception)
         {
-            if (exception is not ArgumentOutOfRangeException)
-                throw;
-            return new GymAvailability(0, 0, true);
+            if (exception is ArgumentOutOfRangeException)
+                return Closed;
+            throw;
         }
     }
 

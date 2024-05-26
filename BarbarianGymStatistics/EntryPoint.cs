@@ -13,21 +13,14 @@ public class EntryPoint
         };
         var restClient = new RestClient(options);
         var restClientAdapter = new RestClientAdapter(restClient);
-        var gymAvailabilityService = new GymAvailabilityService(restClientAdapter);
+        var gymAvailabilityService = new Gym(restClientAdapter);
         const string filePath = "logs/logs.txt";
         Console.WriteLine($"Full path: {Path.GetFullPath(filePath)}");
         var dateTimeProvider = new SystemDateTimeProvider();
         var diskJournal = new DiskJournal(dateTimeProvider, filePath);
         var consoleJournal = new ConsoleJournal(dateTimeProvider);
         var journal = new CompositeJournal(new List<IJournal>() { diskJournal, consoleJournal });
-        var workingHours = new TimeSpanRange(TimeSpan.FromHours(6), TimeSpan.FromHours(21));
-        var root = new Compose(
-            timerAdapter,
-            gymAvailabilityService,
-            journal,
-            dateTimeProvider,
-            workingHours
-        );
+        var root = new Compose(timerAdapter, gymAvailabilityService, journal);
         root.Start();
         Console.WriteLine("Program has been started");
         Console.WriteLine("Press any button to exit");

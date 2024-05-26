@@ -6,25 +6,16 @@ namespace BarbarianGymStatistics;
 public class Compose : IDisposable
 {
     private readonly ITimer _timer;
-    private readonly IGymAvailabilityService _gymAvailabilityService;
+    private readonly IGym _gym;
     private readonly IJournal _journal;
-    private readonly IDateTimeProvider _dateTimeProvider;
-    private readonly TimeSpanRange _workingHours;
+
     private IDisposable _subscriptionOnTimerElapsed = Disposable.Empty;
 
-    public Compose(
-        ITimer timer,
-        IGymAvailabilityService gymAvailabilityService,
-        IJournal journal,
-        IDateTimeProvider dateTimeProvider,
-        TimeSpanRange workingHours
-    )
+    public Compose(ITimer timer, IGym gym, IJournal journal)
     {
         _timer = timer;
-        _gymAvailabilityService = gymAvailabilityService;
+        _gym = gym;
         _journal = journal;
-        _dateTimeProvider = dateTimeProvider;
-        _workingHours = workingHours;
     }
 
     public void Start()
@@ -38,12 +29,11 @@ public class Compose : IDisposable
 
     private async Task WriteGymAvailability()
     {
-        if (!_workingHours.Contains(_dateTimeProvider.Now.TimeOfDay))
-            return;
-
         try
         {
-            var gymAvailability = await _gymAvailabilityService.GetGymAvailabilityAsync();
+            var gymAvailability = await _gym.GetGymAvailabilityAsync();
+            if (gymAvailability.IsClosed)
+                return;
             _journal.Write(gymAvailability);
         }
         catch (Exception exception)
