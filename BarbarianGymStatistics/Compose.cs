@@ -32,8 +32,6 @@ public class Compose : IDisposable
         try
         {
             var gymAvailability = await _gym.GetGymAvailabilityAsync();
-            if (gymAvailability.IsClosed)
-                return;
             _journal.Write(gymAvailability);
         }
         catch (Exception exception)

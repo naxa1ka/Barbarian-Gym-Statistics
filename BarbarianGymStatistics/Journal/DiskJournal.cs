@@ -14,6 +14,8 @@ public class DiskJournal : IJournal
 
     public void Write(GymAvailability gymAvailability)
     {
+        if (gymAvailability.IsClosed)
+            return;
         var logEntry = $"[{_dateTimeProvider.Now}] {gymAvailability}";
         WriteToFile(logEntry);
     }
