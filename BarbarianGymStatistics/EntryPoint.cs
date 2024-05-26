@@ -16,10 +16,18 @@ public class EntryPoint
         var gymAvailabilityService = new GymAvailabilityService(restClientAdapter);
         const string filePath = "logs/logs.txt";
         Console.WriteLine($"Full path: {Path.GetFullPath(filePath)}");
-        var diskJournal = new DiskJournal(filePath);
-        var consoleJournal = new ConsoleJournal();
+        var dateTimeProvider = new SystemDateTimeProvider();
+        var diskJournal = new DiskJournal(dateTimeProvider, filePath);
+        var consoleJournal = new ConsoleJournal(dateTimeProvider);
         var journal = new CompositeJournal(new List<IJournal>() { diskJournal, consoleJournal });
-        var root = new Compose(timerAdapter, gymAvailabilityService, journal);
+        var workingHours = new TimeSpanRange(TimeSpan.FromHours(6), TimeSpan.FromHours(21));
+        var root = new Compose(
+            timerAdapter,
+            gymAvailabilityService,
+            journal,
+            dateTimeProvider,
+            workingHours
+        );
         root.Start();
         Console.WriteLine("Program has been started");
         Console.WriteLine("Press any button to exit");

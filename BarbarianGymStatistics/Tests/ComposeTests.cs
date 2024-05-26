@@ -13,6 +13,7 @@ public class ComposeTests
     private IGymAvailabilityService _gymAvailabilityService = null!;
     private IJournal _journal = null!;
     private Compose _compose = null!;
+    private IDateTimeProvider _dateTimeProvider = null!;
 
     [SetUp]
     public void SetUp()
@@ -22,7 +23,16 @@ public class ComposeTests
         _timer.Elapsed.Returns(_elapsedSubject);
         _gymAvailabilityService = Substitute.For<IGymAvailabilityService>();
         _journal = Substitute.For<IJournal>();
-        _compose = new Compose(_timer, _gymAvailabilityService, _journal);
+        _dateTimeProvider = Substitute.For<IDateTimeProvider>();
+        _dateTimeProvider.Now.Returns(new DateTime(2007, 7, 7, 15, 0, 0));
+        var workingHours = new TimeSpanRange(TimeSpan.FromHours(6), TimeSpan.FromHours(21));
+        _compose = new Compose(
+            _timer,
+            _gymAvailabilityService,
+            _journal,
+            _dateTimeProvider,
+            workingHours
+        );
     }
 
     [Test]
@@ -62,9 +72,10 @@ public class ComposeTests
     public async Task WhenTimerElapsed_ThenShouldWriteGymAvailability()
     {
         // Arrange
-        var gymAvailability = new GymAvailability(42, 666);
+        var gymAvailability = new GymAvailability(42, 666, false);
         _gymAvailabilityService.GetGymAvailabilityAsync().Returns(Task.FromResult(gymAvailability));
         _compose.Start();
+        await WaitForTheAsyncMethodCall();
         _journal.ClearReceivedCalls();
 
         // Act
@@ -79,7 +90,7 @@ public class ComposeTests
     public async Task WhenStart_ThenShouldWriteGymAvailabilityImmediately()
     {
         // Arrange
-        var gymAvailability = new GymAvailability(42, 666);
+        var gymAvailability = new GymAvailability(42, 666, false);
         _gymAvailabilityService.GetGymAvailabilityAsync().Returns(Task.FromResult(gymAvailability));
         _timer.Elapsed.Returns(Observable.Empty<Unit>());
 
@@ -89,6 +100,39 @@ public class ComposeTests
 
         // Assert
         _journal.Received(1).Write(gymAvailability);
+    }
+
+    [Test]
+    public async Task WhenStart_AndGymIsOpen_ThenShouldWriteGymAvailability()
+    {
+        // Arrange
+        var gymAvailability = new GymAvailability(42, 666, false);
+        _gymAvailabilityService.GetGymAvailabilityAsync().Returns(Task.FromResult(gymAvailability));
+        _timer.Elapsed.Returns(Observable.Empty<Unit>());
+
+        // Act
+        _compose.Start();
+        await WaitForTheAsyncMethodCall();
+
+        // Assert
+        _journal.Received(1).Write(gymAvailability);
+    }
+
+    [Test]
+    public async Task WhenStart_AndGymIsClosed_ThenShouldDontWriteGymAvailability()
+    {
+        // Arrange
+        var gymAvailability = new GymAvailability(42, 666, true);
+        _dateTimeProvider.Now.Returns(new DateTime(2007, 7, 7, 22, 0, 0));
+        _gymAvailabilityService.GetGymAvailabilityAsync().Returns(Task.FromResult(gymAvailability));
+        _timer.Elapsed.Returns(Observable.Empty<Unit>());
+
+        // Act
+        _compose.Start();
+        await WaitForTheAsyncMethodCall();
+
+        // Assert
+        _journal.DidNotReceive().Write(gymAvailability);
     }
 
     private static Task WaitForTheAsyncMethodCall() => Task.Delay(TimeSpan.FromMilliseconds(100));
