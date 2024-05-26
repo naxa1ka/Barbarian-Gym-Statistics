@@ -6,11 +6,13 @@ public class GymAvailability : IGymAvailability
 {
     public int LiveCount { get; }
     public int Capacity { get; }
+    public bool IsClosed { get; }
 
-    public GymAvailability(int liveCount, int capacity)
+    public GymAvailability(int liveCount, int capacity, bool isClosed)
     {
         LiveCount = liveCount;
         Capacity = capacity;
+        IsClosed = isClosed;
     }
 
     public static GymAvailability FromXml(string xml)
@@ -20,10 +22,21 @@ public class GymAvailability : IGymAvailability
         var doc = XDocument.Parse(xml);
         var dataSet = doc.Descendants(dataSetName).Single();
         var columns = dataSet.Descendants(columnName).ToList();
-        var liveCount = columns.ElementAt(1).Value;
-        var capacity = columns.ElementAt(2).Value;
-        return new GymAvailability(int.Parse(liveCount), int.Parse(capacity));
+        try
+        {
+            var liveCount = int.Parse(columns.ElementAt(1).Value);
+            var capacity = int.Parse(columns.ElementAt(2).Value);
+            return new GymAvailability(liveCount, capacity, false);
+        }
+        catch (Exception exception)
+        {
+            if (exception is not ArgumentOutOfRangeException)
+                throw;
+            return new GymAvailability(0, 0, false);
+        }
     }
 
-    public override string ToString() => $"{LiveCount}/{Capacity}";
+    public override string ToString() => $"The gym is {IsClosedToString()}: {LiveCount}/{Capacity}";
+
+    private string IsClosedToString() => IsClosed ? "closed" : "open";
 }

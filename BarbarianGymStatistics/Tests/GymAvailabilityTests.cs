@@ -23,6 +23,7 @@ public class GymAvailabilityTests
         // Assert
         gymAvailability.LiveCount.Should().Be(liveCount);
         gymAvailability.Capacity.Should().Be(capacity);
+        gymAvailability.IsClosed.Should().BeFalse();
     }
 
     [Test]
@@ -36,5 +37,20 @@ public class GymAvailabilityTests
 
         // Assert
         create.Should().Throw<Exception>();
+    }
+
+    [Test]
+    public void WhenCreateGymAvailabilityFromXml_AndXmlWhenGymIsClosed_ThenIsClosedShouldBeTrue()
+    {
+        // Arrange
+        var xmlResponse = GymAvailabilityTestDataFactory.CreateXmlResponseWhenGymIsClosed();
+
+        // Act
+        var gymAvailability = GymAvailability.FromXml(xmlResponse);
+
+        // Assert
+        gymAvailability.IsClosed.Should().BeTrue();
+        gymAvailability.LiveCount.Should().Be(0);
+        gymAvailability.Capacity.Should().Be(0);
     }
 }
