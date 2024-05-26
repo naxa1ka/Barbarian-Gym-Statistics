@@ -32,7 +32,7 @@ public class GymAvailability : IGymAvailability
         {
             if (exception is not ArgumentOutOfRangeException)
                 throw;
-            return new GymAvailability(0, 0, false);
+            return new GymAvailability(0, 0, true);
         }
     }
 
