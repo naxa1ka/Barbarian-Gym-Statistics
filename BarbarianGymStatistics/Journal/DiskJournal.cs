@@ -2,23 +2,25 @@ namespace BarbarianGymStatistics;
 
 public class DiskJournal : IJournal
 {
+    private readonly IDateTimeProvider _dateTimeProvider;
     private readonly string _filePath;
 
-    public DiskJournal(string filePath)
+    public DiskJournal(IDateTimeProvider dateTimeProvider, string filePath)
     {
+        _dateTimeProvider = dateTimeProvider;
         _filePath = filePath;
         EnsureDirectoryExists();
     }
 
     public void Write(GymAvailability gymAvailability)
     {
-        var logEntry = $"[{DateTime.Now}] {gymAvailability}";
+        var logEntry = $"[{_dateTimeProvider.Now}] {gymAvailability}";
         WriteToFile(logEntry);
     }
 
     public void Write(Exception exception)
     {
-        var logEntry = $"[{DateTime.Now}] Exception - {exception.Message}";
+        var logEntry = $"[{_dateTimeProvider.Now}] Exception - {exception.Message}";
         WriteToFile(logEntry);
     }
 
