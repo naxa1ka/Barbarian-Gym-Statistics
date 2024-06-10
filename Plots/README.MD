@@ -1,0 +1,1 @@
+Chat GPT writed this code. idk python
