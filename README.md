@@ -8,7 +8,7 @@ The project started when I realized that it was getting quite hot in Cyprus, and
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
 # Results
-[2024-05-27 to 2024-06-10](https://github.com/naxa1ka/Barbarian-Gym-Statistics/tree/master/Plots/plots_2024-05-27_to_2024-06-10)
+[2024-05-27 to 2024-06-10](https://github.com/naxa1ka/Barbarian-Gym-Statistics/tree/master/Plots/plots_2024-05-27_to_2024-06-10) <br/>
 [2024-05-27_to_2024-06-21](https://github.com/naxa1ka/Barbarian-Gym-Statistics/tree/master/Plots/plots_2024-05-27_to_2024-06-21)
 
 # Gym contacts
