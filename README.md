@@ -9,6 +9,7 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 
 # Results
 [2024-05-27 to 2024-06-10](https://github.com/naxa1ka/Barbarian-Gym-Statistics/tree/master/Plots/plots_2024-05-27_to_2024-06-10)
+[2024-05-27_to_2024-06-21](https://github.com/naxa1ka/Barbarian-Gym-Statistics/tree/master/Plots/plots_2024-05-27_to_2024-06-21)
 
 # Gym contacts
 * [Map](https://maps.app.goo.gl/Wr1nSoi5iaJxheBi8)
